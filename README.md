@@ -45,6 +45,10 @@ await hassWSApi.CallServiceAsync("homeassistant", "check_config");
 // Optional data can be passed to the call operation.
 await hassWSApi.CallServiceAsync(KnownDomains.Light, KnownServices.TurnOn, data: new { entity_id = "light.my_light", brightness_pct = 20});
 
+// Send message to google tts.speak
+await hassWSApi.CallServiceAsync("tts", "speak", data: new { entity_id = "all", media_player_entity_id = "media_player.living_room_speaker", Message = "hello world" });
+
+
 // When only entity_id is needed for the invocation this overload can be used.
 await hassWSApi.CallServiceForEntitiesAsync(KnownDomains.Light, KnownServices.Toggle, "light.my_light1", "light.my_light2");
 ```
@@ -175,4 +179,5 @@ RawCommandResult rawResult = await hassWSApi.SendRawCommandWithResultAsync(new R
 
 // Send raw command message with success result
 bool success = await hassWSApi.SendRawCommandWithSuccessAsync(new RawCommandMessage("get_config"));
+
 ```
